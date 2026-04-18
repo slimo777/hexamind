@@ -1,0 +1,26 @@
+{
+  "expo": {
+    "name": "AgriForage",
+    "slug": "agri-forage-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "scheme": "agriforage",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.hexamind.agriforage"
+    },
+    "android": {
+      "package": "com.hexamind.agriforage"
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Autoriser AgriForage a utiliser votre position pour centrer la carte sur votre parcelle."
+        }
+      ]
+    ]
+  }
+}
+
