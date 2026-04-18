@@ -7,7 +7,6 @@ export type Phase = "idle" | "selecting" | "loading" | "result";
 export function useForageWorkflow() {
   const [phase, setPhase] = useState<Phase>("idle");
   const [selectedCoordinate, setSelectedCoordinate] = useState<LatLng | null>(null);
-  const [history, setHistory] = useState<LatLng[]>([]);
   const [analysisResult, setAnalysisResult] = useState<ForageResult | null>(null);
 
   function handleStart() {
@@ -18,7 +17,6 @@ export function useForageWorkflow() {
     if (phase === "loading" || phase === "result") return;
     const coord = e.nativeEvent.coordinate;
     setSelectedCoordinate(coord);
-    setHistory((prev) => [coord, ...prev].slice(0, 10));
     if (phase === "idle") setPhase("selecting");
   }
 
@@ -44,7 +42,6 @@ export function useForageWorkflow() {
   return {
     phase,
     selectedCoordinate,
-    history,
     analysisResult,
     handleStart,
     handleMapPress,

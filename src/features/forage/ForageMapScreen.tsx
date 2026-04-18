@@ -30,7 +30,6 @@ export function ForageMapScreen() {
   const {
     phase,
     selectedCoordinate,
-    history,
     analysisResult,
     handleStart,
     handleMapPress,
@@ -135,6 +134,10 @@ export function ForageMapScreen() {
         showsUserLocation
         showsCompass
         showsScale
+        showsPointsOfInterest={false}
+        showsIndoors={false}
+        showsBuildings={false}
+        showsTraffic={false}
       >
         {selectedCoordinate && (
           <Marker
@@ -144,18 +147,7 @@ export function ForageMapScreen() {
             pinColor="#D85A30"
           />
         )}
-        {history.map((pt, i) =>
-          i === 0 ? null : (
-            <Marker
-              key={i}
-              coordinate={pt}
-              pinColor="#9FE1CB"
-              opacity={0.6}
-              title={`Point précédent ${i}`}
-              description={`${pt.latitude.toFixed(5)}, ${pt.longitude.toFixed(5)}`}
-            />
-          )
-        )}
+
       </MapView>
 
       {/* ── TOP CONTROLS ── */}
@@ -221,23 +213,6 @@ export function ForageMapScreen() {
             </View>
           </View>
 
-          {/* History chips */}
-          {history.length > 1 && (
-            <View style={styles.historyRow}>
-              <Text style={styles.historyLabel}>Récents :</Text>
-              {history.slice(1, 4).map((pt, i) => (
-                <TouchableOpacity
-                  key={i}
-                  style={styles.historyChip}
-                  onPress={() => handleMapPress({ nativeEvent: { coordinate: pt } } as any)}
-                >
-                  <Text style={styles.historyChipText}>
-                    {pt.latitude.toFixed(3)}, {pt.longitude.toFixed(3)}
-                  </Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-          )}
 
           {/* Action buttons */}
           {phase === "selecting" && (
